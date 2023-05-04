@@ -6,16 +6,16 @@ const sequelize = new Sequelize(
   process.env.DB_PASSWORD, // Ej: root
   {
     host: process.env.DB_HOST, // Ej: 127.0.0.1
-    dialect: process.env.DB_CONNECTION, // Ej: mysql
+    dialect: "mysql", // Ej: mysql
     logging: false, // Para que no aparezcan mensajes en consola.
   },
 );
 
-const User = require("./User");
+const Author = require("./Author");
 const Comment = require("./Comment");
 const Article = require("./Article");
 
-User.initModel(sequelize);
+Author.initModel(sequelize);
 Comment.initModel(sequelize);
 Article.initModel(sequelize);
 
@@ -26,7 +26,7 @@ Article.initModel(sequelize);
 
 module.exports = {
   sequelize,
-  User,
+  Author,
   Comment,
   Article,
 };
