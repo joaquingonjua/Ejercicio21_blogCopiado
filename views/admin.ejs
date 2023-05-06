@@ -13,12 +13,12 @@
       integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="/styles.css" />
+    <!-- <link rel="stylesheet" href="/css/stylesPrivate.css" /> -->
   </head>
   <body>
-    <div class="container d-flex flex-column mt-5 shadow rounded p-5">
+    <div class="container-fluid d-flex flex-column mt-5 p-5">
       <div class="d-flex justify-content-between align-items-center">
-        <div><h1>Listado de Usuarios</h1></div>
+        <div><h1>Articles</h1></div>
 
         <div>
           <a id="btn-nuevo" href="/usuarios/crear" class="btn btn-success">Nuevo</a>
@@ -37,28 +37,34 @@
             </tr>
           </thead>
           <tbody>
-            <!-- <% for (const item of users) { %>
+            <% for (const article of articles) { %>
             <tr>
-            <td><%= item.id %></td>
+              <td><%= article.id %></td>
 
-            <td><%= item.firstname %></td>
+              <td><%= article.title %></td>
 
-            <td><%= item.lastname %></td>
+              <td><%= article.content %></td>
 
-            <td><%= item.age %></td>
-            <% } %>
+              <td><%= article.createdAt %></td>
 
-            <td>
-              <div class="d-flex flex-row m-2 justify-content-center">
-                <div class="ms-2">
-                  <a href="/usuarios/editar/<%= item.id %>" class="btn btn-primary"> Modificar </a>
+              <td><%= article.author.firstname %></td>
+
+              <td>
+                <div class="d-flex flex-row m-2 justify-content-center">
+                  <div class="ms-2">
+                    <a href="/usuarios/editar/<%= article.id %>" class="btn btn-primary">
+                      Modificar
+                    </a>
+                  </div>
+                  <div class="ms-2">
+                    <a href="/usuarios/eliminar/<%= article.id %>" class="btn btn-danger"
+                      >Eliminar</a
+                    >
+                  </div>
                 </div>
-                <div class="ms-2">
-                  <a href="/usuarios/eliminar/<%= item.id %>" class="btn btn-danger">Eliminar</a>
-                </div>
-              </div>
-            </td>
-            </tr>-->
+              </td>
+              <% } %>
+            </tr>
           </tbody>
         </table>
       </div>
