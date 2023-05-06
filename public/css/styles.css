@@ -62,3 +62,7 @@ i {
   flex-direction: column;
   justify-content: center;
 }
+.article-resume {
+  margin: auto;
+  max-width: 70%;
+}
