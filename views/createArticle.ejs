@@ -19,15 +19,19 @@
     <section id="section-header"><%- include("partials/navbar") %></section>
     <section id="createForm">
       <div class="container shadow rounded p-5 mt-5">
-        <form>
+        <form method="post" action="/articulos">
           <div class="mb-3">
-            <label for="articleAuthor" class="form-label">Nombre del Autor</label>
+            <label for="articleAuthor" class="form-label">Id del Autor</label>
 
-            <input type="text" class="form-control" id="articleAuthor" />
+            <input type="text" class="form-control" id="articleAuthor" name="authorId" required />
           </div>
           <div class="mb-3">
             <label for="articleTitle" class="form-label">Título</label>
-            <input type="text" class="form-control" id="articletitle" />
+            <input type="text" class="form-control" id="articletitle" name="title" required />
+          </div>
+          <div class="mb-3">
+            <label for="articleImage" class="form-label" name="image">Insertar imagen</label>
+            <input class="form-control" type="file" id="articleImage" />
           </div>
           <div class="mb-3">
             <label for="articleContent" class="form-label">Contenido</label>
@@ -36,6 +40,7 @@
               class="form-control"
               id="articleContent"
               style="height: 100px"
+              name="content"
             ></textarea>
           </div>
 

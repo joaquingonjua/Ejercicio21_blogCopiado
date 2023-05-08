@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nuevo Articulo</title>
+    <title>Editar Artículo</title>
     <script src="https://kit.fontawesome.com/8d24a6e83f.js" crossorigin="anonymous"></script>
     <!-- CSS de Bootstrap -->
     <link
@@ -19,15 +19,31 @@
     <section id="section-header"><%- include("partials/navbar") %></section>
     <section id="createForm">
       <div class="container shadow rounded p-5 mt-5">
-        <form>
+        <form method="POST" action="/articulos/<%=article.id %>?_method=PATCH">
           <div class="mb-3">
             <label for="articleAuthor" class="form-label">Nombre del Autor</label>
 
-            <input type="text" class="form-control" id="articleAuthor" />
+            <input
+              type="text"
+              class="form-control"
+              id="articleAuthor"
+              value="<%=article.authorId%>"
+              name="authorId"
+            />
           </div>
           <div class="mb-3">
             <label for="articleTitle" class="form-label">Título</label>
-            <input type="text" class="form-control" id="articletitle" />
+            <input
+              type="text"
+              class="form-control"
+              id="articletitle"
+              value="<%=article.title%>"
+              name="title"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="articleImage" class="form-label">Insertar imagen</label>
+            <input class="form-control" type="file" id="articleImage" name="image" />
           </div>
           <div class="mb-3">
             <label for="articleContent" class="form-label">Contenido</label>
@@ -36,10 +52,13 @@
               class="form-control"
               id="articleContent"
               style="height: 100px"
-            ></textarea>
+              name="content"
+            >
+<%=article.content%></textarea
+            >
           </div>
 
-          <button type="submit" class="btn btn-primary">Publicar</button>
+          <button type="submit" class="btn btn-primary">Guardar cambios</button>
         </form>
       </div>
     </section>

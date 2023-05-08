@@ -28,15 +28,16 @@
         </div>
       </div>
       <div class="justify-content-center align-items-center">
-        <table class="table table-secondary table-striped">
+        <table id="articlesTable" class="table table-secondary table-striped">
           <thead>
             <tr>
               <th scope="col">ID</th>
-              <th scope="col">Title</th>
-              <th scope="col">Content</th>
-              <th scope="col">Publish Date</th>
-              <th scope="col">Author</th>
-              <th scope="col">Actions</th>
+              <th scope="col">Título</th>
+              <th scope="col">Contenido</th>
+              <th scope="col">Imagen</th>
+              <th scope="col">Fecha de publicación</th>
+              <th scope="col">Autor</th>
+              <th scope="col">Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -46,11 +47,13 @@
 
               <td><%= article.title %></td>
 
-              <td><%= article.content %></td>
+              <td id="content"><%= article.content %></td>
+
+              <td>Imagen</td>
 
               <td><%= article.createdAt %></td>
 
-              <td><%= article.author.firstname %></td>
+              <td><%= article.author.firstname %> <%= article.author.lastname %></td>
 
               <td>
                 <div class="d-flex flex-row m-2 justify-content-center">
@@ -60,9 +63,9 @@
                     </a>
                   </div>
                   <div class="ms-2">
-                    <a href="/articulos/eliminar/<%= article.id %>" class="btn btn-danger"
-                      >Eliminar</a
-                    >
+                    <form method="POST" action="/articulos/<%=article.id%>?_method=DELETE">
+                      <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </form>
                   </div>
                 </div>
               </td>
