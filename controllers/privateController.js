@@ -5,10 +5,6 @@ app.use(express.json());
 
 const { Article } = require("../models");
 
-async function showTable(req, res) {
-  const articles = await Article.findAll({ include: "author" });
-  //   res.json(articles);
-  res.render("admin", { articles });
-}
+async function showTable(req, res) {}
 
 module.exports = { showTable };

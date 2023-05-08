@@ -21,6 +21,7 @@ const { Article } = require("../models");
 async function showHome(req, res) {
   const articles = await Article.findAll({
     order: [["createdAt", "DESC"]],
+    include: "author",
   });
 
   res.render("home", { articles });

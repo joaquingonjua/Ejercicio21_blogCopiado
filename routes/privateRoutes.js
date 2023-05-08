@@ -4,6 +4,6 @@ const privateController = require("../controllers/privateController");
 // Rutas relacionadas al panel de control (Admin):
 // ...
 
-router.get("/", privateController.showTable);
+router.get("/");
 
 module.exports = router;
