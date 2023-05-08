@@ -1,4 +1,5 @@
-const { Article } = require("../models");
+const { Article, Comment } = require("../models");
+const sequelize = require("sequelize");
 
 // Display a listing of the resource.
 async function index(req, res) {
@@ -8,7 +9,31 @@ async function index(req, res) {
 
 // Display the specified resource.
 async function show(req, res) {
-  res.render("article");
+  const article = await Article.findByPk(req.params.id, {
+    include: "author",
+    attributes: [
+      "id",
+      "title",
+      "content",
+      [
+        sequelize.fn("DATE_FORMAT", sequelize.col("Article.createdAt"), "%d/%m/%Y %H:%m"),
+        "createdAt",
+      ],
+    ],
+  });
+  const comments = await Comment.findAll({
+    where: { articleId: req.params.id },
+    attributes: [
+      "id",
+      "content",
+      "user",
+      [
+        sequelize.fn("DATE_FORMAT", sequelize.col("Comment.createdAt"), "%d/%m/%Y %H:%m"),
+        "createdAt",
+      ],
+    ],
+  });
+  res.render("article", { article, comments });
 }
 
 // Show the form for creating a new resource
