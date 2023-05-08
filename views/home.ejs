@@ -37,10 +37,10 @@
     <section id="section-content">
       <div class="container">
         <div class="column justify-content-center mt-5">
-          <% for (let i = 0; i < 4; i ++) { %>
+          <% for (let i = 0; i < articles.length ; i ++) { %>
           <div class="row article-resume">
             <div>
-              <h2><%=articles[i].title%></h2>
+              <h2><a href="#"><%=articles[i].title%></a></h2>
               <hr />
             </div>
             <div>
