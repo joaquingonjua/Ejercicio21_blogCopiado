@@ -1,14 +1,21 @@
 const { Article } = require("../models");
-const { format, formatDistance, formatRelative, subDays } = require("date-fns");
-const { es } = require("date-fns/locale");
+const sequelize = require("sequelize");
+const formidable = require("formidable");
 
 // Display a listing of the resource.
 async function index(req, res) {
-  const articles = await Article.findAll({ include: "author" });
-  for (let i = 0; i < articles.length; i++) {
-    articles[i].createdAt.defaultValue = format(new Date(), "dd MM yyyy HH:mm", { locale: es });
-  }
-  console.log(articles[0].createdAt);
+  const articles = await Article.findAll({
+    include: "author",
+    attributes: [
+      "id",
+      "title",
+      "content",
+      [
+        sequelize.fn("DATE_FORMAT", sequelize.col("Article.createdAt"), "%d/%m/%Y %H:%m"),
+        "createdAt",
+      ],
+    ],
+  });
   res.render("admin", { articles });
 }
 
@@ -24,6 +31,20 @@ async function create(req, res) {
 
 // Store a newly created resource in storage.
 async function store(req, res) {
+  const form = formidable({
+    multiples: true,
+    uploadDir: __dirname + "/img",
+    keepExtensions: true,
+  });
+
+  form.parse(req, (err, fields, files) => {
+    console.log(files, fields);
+    res.redirect("articulos");
+    if (err) {
+      console.log(err);
+    }
+  });
+
   await Article.create({
     title: req.body.title,
     content: req.body.content,
@@ -50,7 +71,6 @@ async function update(req, res) {
       where: { id: req.params.id },
     },
   );
-  console.log(req.body);
   res.redirect("/articulos");
 }
 

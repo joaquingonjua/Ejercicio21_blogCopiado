@@ -7,6 +7,10 @@ class Comment extends Model {
         content: {
           type: DataTypes.TEXT,
         },
+        user: {
+          type: DataTypes.STRING(100),
+          allowNull: false,
+        },
       },
       {
         sequelize,
