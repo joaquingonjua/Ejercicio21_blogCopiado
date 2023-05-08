@@ -1,4 +1,5 @@
-const { Article } = require("../models");
+const { Article, Comment } = require("../models");
+const sequelize = require("sequelize");
 
 // Display a listing of the resource.
 async function index(req, res) {
