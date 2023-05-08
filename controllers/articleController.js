@@ -1,9 +1,19 @@
-const { Article, Comment } = require("../models");
-const sequelize = require("sequelize");
+const { Article } = require("../models");
 
 // Display a listing of the resource.
 async function index(req, res) {
-  const articles = await Article.findAll({ include: "author" });
+  const articles = await Article.findAll({
+    include: "author",
+    attributes: [
+      "id",
+      "title",
+      "content",
+      [
+        sequelize.fn("DATE_FORMAT", sequelize.col("Article.createdAt"), "%d/%m/%Y %H:%m"),
+        "createdAt",
+      ],
+    ],
+  });
   res.render("admin", { articles });
 }
 
@@ -42,19 +52,53 @@ async function create(req, res) {
 }
 
 // Store a newly created resource in storage.
-async function store(req, res) {}
+async function store(req, res) {
+  const form = formidable({
+    multiples: true,
+    uploadDir: __dirname + "/img",
+    keepExtensions: true,
+  });
+
+  form.parse(req, (err, fields, files) => {
+    console.log(files, fields);
+    res.redirect("articulos");
+    if (err) {
+      console.log(err);
+    }
+  });
+
+  await Article.create({
+    title: req.body.title,
+    content: req.body.content,
+    authorId: Number(req.body.authorId),
+  });
+  res.redirect("/articulos");
+}
 
 // Show the form for editing the specified resource.
 async function edit(req, res) {
-  res.render("editArticle");
+  const article = await Article.findByPk(req.params.id);
+  req.body.title = res.render("editArticle", { article });
 }
 
 // Update the specified resource in storage.
-async function update(req, res) {}
+async function update(req, res) {
+  await Article.update(
+    {
+      title: req.body.title,
+      content: req.body.content,
+      authorId: req.body.authorId,
+    },
+    {
+      where: { id: req.params.id },
+    },
+  );
+  res.redirect("/articulos");
+}
 
 // Remove the specified resource from storage.
 async function destroy(req, res) {
-  await db.delet("users", req.params.id);
+  await Article.destroy({ where: { id: req.params.id } });
   res.redirect("/articulos");
 }
 

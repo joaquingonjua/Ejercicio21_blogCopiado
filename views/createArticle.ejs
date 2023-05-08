@@ -13,21 +13,44 @@
       integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="/css/stylesArticle.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
   </head>
   <body>
     <section id="section-header"><%- include("partials/navbar") %></section>
     <section id="createForm">
       <div class="container shadow rounded p-5 mt-5">
-        <form>
+        <form method="post" action="/articulos">
           <div class="mb-3">
-            <label for="articleAuthor" class="form-label">Nombre del Autor</label>
+            <label for="articleAuthor" class="form-label">Id del Autor</label>
 
-            <input type="text" class="form-control" id="articleAuthor" />
+            <input
+              type="text"
+              class="form-control"
+              id="articleAuthor"
+              name="authorId"
+              placeholder="Ingrese ID de autor..."
+              required
+            />
           </div>
           <div class="mb-3">
             <label for="articleTitle" class="form-label">Título</label>
-            <input type="text" class="form-control" id="articletitle" />
+            <input
+              type="text"
+              class="form-control"
+              id="articletitle"
+              name="title"
+              placeholder="Ingrese titulo del artículo..."
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="articleImage" class="form-label" name="image">Insertar imagen</label>
+            <input
+              class="form-control"
+              type="file"
+              id="articleImage"
+              enctype="multipart/form-data"
+            />
           </div>
           <div class="mb-3">
             <label for="articleContent" class="form-label">Contenido</label>
@@ -36,6 +59,8 @@
               class="form-control"
               id="articleContent"
               style="height: 100px"
+              name="content"
+              placeholder="Ingrese el contenido del artículo..."
             ></textarea>
           </div>
 

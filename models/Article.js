@@ -1,4 +1,6 @@
 const { Model, DataTypes } = require("sequelize");
+const { format, formatDistance, formatRelative, subDays } = require("date-fns");
+const { es } = require("date-fns/locale");
 
 class Article extends Model {
   static initModel(sequelize) {
