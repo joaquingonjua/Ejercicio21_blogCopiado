@@ -17,21 +17,11 @@
  */
 
 const { Article } = require("../models");
-const sequelize = require("sequelize");
 
 async function showHome(req, res) {
   const articles = await Article.findAll({
     order: [["createdAt", "DESC"]],
     include: "author",
-    attributes: [
-      "id",
-      "title",
-      "content",
-      [
-        sequelize.fn("DATE_FORMAT", sequelize.col("Article.createdAt"), "%d de %M, %Y"),
-        "createdAt",
-      ],
-    ],
   });
 
   res.render("home", { articles });
