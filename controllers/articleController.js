@@ -1,5 +1,6 @@
 const { Article, Comment } = require("../models");
 const sequelize = require("sequelize");
+const formidable = require("formidable");
 
 // Display a listing of the resource.
 async function index(req, res) {
@@ -8,6 +9,7 @@ async function index(req, res) {
     attributes: [
       "id",
       "title",
+      "imageURL",
       "content",
       [
         sequelize.fn("DATE_FORMAT", sequelize.col("Article.createdAt"), "%d/%m/%Y %H:%m"),
@@ -21,30 +23,10 @@ async function index(req, res) {
 // Display the specified resource.
 async function show(req, res) {
   const article = await Article.findByPk(req.params.id, {
-    include: "author",
-    attributes: [
-      "id",
-      "title",
-      "content",
-      [
-        sequelize.fn("DATE_FORMAT", sequelize.col("Article.createdAt"), "%d/%m/%Y %H:%m"),
-        "createdAt",
-      ],
-    ],
+    include: ["author", "comments"],
   });
-  const comments = await Comment.findAll({
-    where: { articleId: req.params.id },
-    attributes: [
-      "id",
-      "content",
-      "user",
-      [
-        sequelize.fn("DATE_FORMAT", sequelize.col("Comment.createdAt"), "%d/%m/%Y %H:%m"),
-        "createdAt",
-      ],
-    ],
-  });
-  res.render("article", { article, comments });
+  const comments = article.comments;
+  return res.render("article", { article, comments });
 }
 
 // Show the form for creating a new resource
@@ -56,24 +38,23 @@ async function create(req, res) {
 async function store(req, res) {
   const form = formidable({
     multiples: true,
-    uploadDir: __dirname + "/img",
+    uploadDir: "C:/Users/Andrew/Documents/GitHub/Ejercicio21_blog/public/img",
     keepExtensions: true,
   });
 
-  form.parse(req, (err, fields, files) => {
-    console.log(files, fields);
-    res.redirect("articulos");
+  form.parse(req, async (err, fields, files) => {
     if (err) {
       console.log(err);
     }
+    await Article.create({
+      title: fields.title,
+      content: fields.content,
+      imageURL: files.image.newFilename,
+      authorId: fields.authorId,
+    });
   });
 
-  await Article.create({
-    title: req.body.title,
-    content: req.body.content,
-    authorId: Number(req.body.authorId),
-  });
-  res.redirect("/articulos");
+  return await res.redirect("/articulos");
 }
 
 // Show the form for editing the specified resource.
@@ -84,23 +65,35 @@ async function edit(req, res) {
 
 // Update the specified resource in storage.
 async function update(req, res) {
-  await Article.update(
-    {
-      title: req.body.title,
-      content: req.body.content,
-      authorId: req.body.authorId,
-    },
-    {
-      where: { id: req.params.id },
-    },
-  );
-  res.redirect("/articulos");
+  const form = formidable({
+    multiples: true,
+    uploadDir: "C:/Users/Andrew/Documents/GitHub/Ejercicio21_blog/public/img",
+    keepExtensions: true,
+  });
+
+  form.parse(req, async (err, fields, files) => {
+    if (err) {
+      console.log(err);
+    }
+    await Article.update(
+      {
+        title: fields.title,
+        content: fields.content,
+        imageURL: files.image.newFilename,
+        authorId: fields.authorId,
+      },
+      {
+        where: { id: req.params.id },
+      },
+    );
+  });
+  return res.redirect("/articulos");
 }
 
 // Remove the specified resource from storage.
 async function destroy(req, res) {
   await Article.destroy({ where: { id: req.params.id } });
-  res.redirect("/articulos");
+  return res.redirect("/articulos");
 }
 
 // Otros handlers...

@@ -28,7 +28,7 @@
         </div>
       </div>
       <div class="justify-content-center align-items-center mt-3">
-        <table id="articlesTable" class="table table-secondary table-striped">
+        <table id="articlesTable" class="table table-light table-striped table-hover">
           <thead>
             <tr>
               <th scope="col">ID</th>
@@ -42,15 +42,22 @@
           </thead>
           <tbody>
             <% for (const article of articles) { %>
-            <tr>
+            <tr
+              style="cursor: pointer"
+              onclick="document.location='http://localhost:3000/articulos/<%=article.id%>'"
+            >
               <td><%= article.id %></td>
 
               <td><%= article.title %></td>
 
               <td id="content"><%= article.content.slice(0, 50) %>...</td>
-
-              <td>Imagen</td>
-
+              <td>
+                <%if (article.imageURL != null) {%>
+                <img src="/img/<%=article.imageURL%>" class="urlImg" alt="" />
+                <%} else {%>
+                <img src="/img/jeshoots-com-pUAM5hPaCRI-unsplash.jpg" class="urlImg" alt="" />
+                <% } %>
+              </td>
               <td><%= article.createdAt %></td>
 
               <td><%= article.author.firstname %> <%= article.author.lastname %></td>
@@ -69,6 +76,7 @@
                   </div>
                 </div>
               </td>
+
               <% } %>
             </tr>
           </tbody>
@@ -82,5 +90,12 @@
       integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
       crossorigin="anonymous"
     ></script>
+
+    <script>
+      function accessArticle() {
+        document.location = `http://localhost:3000/articulos/${article.id}`;
+        console.log("hola");
+      }
+    </script>
   </body>
 </html>
