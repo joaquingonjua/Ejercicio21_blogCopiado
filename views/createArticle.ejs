@@ -19,7 +19,7 @@
     <section id="section-header"><%- include("partials/navbar") %></section>
     <section id="createForm">
       <div class="container shadow rounded p-5 mt-5">
-        <form method="post" action="/articulos">
+        <form method="post" action="/articulos" enctype="multipart/form-data">
           <div class="mb-3">
             <label for="articleAuthor" class="form-label">Id del Autor</label>
 
@@ -44,13 +44,8 @@
             />
           </div>
           <div class="mb-3">
-            <label for="articleImage" class="form-label" name="image">Insertar imagen</label>
-            <input
-              class="form-control"
-              type="file"
-              id="articleImage"
-              enctype="multipart/form-data"
-            />
+            <label for="articleImage" class="form-label">Insertar imagen</label>
+            <input class="form-control" type="file" id="articleImage" name="image" />
           </div>
           <div class="mb-3">
             <label for="articleContent" class="form-label">Contenido</label>
