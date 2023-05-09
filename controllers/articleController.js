@@ -39,7 +39,7 @@ async function create(req, res) {
 async function store(req, res) {
   const form = formidable({
     multiples: true,
-    uploadDir: "C:/Users/Andrew/Documents/GitHub/Ejercicio21_blog/public/img",
+    uploadDir: __dirname + "/../public/img",
     keepExtensions: true,
   });
 
@@ -68,7 +68,7 @@ async function edit(req, res) {
 async function update(req, res) {
   const form = formidable({
     multiples: true,
-    uploadDir: "C:/Users/Andrew/Documents/GitHub/Ejercicio21_blog/public/img",
+    uploadDir: __dirname + "/../public/img",
     keepExtensions: true,
   });
 
