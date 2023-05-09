@@ -24,6 +24,7 @@ async function index(req, res) {
 async function show(req, res) {
   const article = await Article.findByPk(req.params.id, {
     include: ["author", "comments"],
+    order: [["comments", "createdAt", "DESC"]],
   });
   const comments = article.comments;
   return res.render("article", { article, comments });
