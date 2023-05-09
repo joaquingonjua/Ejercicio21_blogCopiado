@@ -16,7 +16,9 @@
     <link rel="stylesheet" href="/css/styles.css" />
   </head>
   <body>
-    <section id="section-header"><%- include("partials/navbar") %></section>
+    <section id="section-header">
+      <%- include("partials/navbar", {loginBtn: textoBoton, link: ruta, }) %>
+    </section>
     <section id="createForm">
       <div class="container shadow rounded p-5 mt-5">
         <form

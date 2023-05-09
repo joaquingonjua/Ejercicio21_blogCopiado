@@ -1,11 +1,15 @@
 const { Article, Comment } = require("../models");
 const sequelize = require("sequelize");
 const formidable = require("formidable");
+const pagesController = require("./pagesController");
 
 // Display a listing of the resource.
 async function index(req, res) {
   const articles = await Article.findAll({
     include: "author",
+    where: {
+      authorId: req.user.id,
+    },
     attributes: [
       "id",
       "title",
@@ -17,7 +21,8 @@ async function index(req, res) {
       ],
     ],
   });
-  res.render("admin", { articles });
+  const { textoBoton, ruta } = pagesController.buttonNavbar(req);
+  res.render("admin", { articles, textoBoton, ruta });
 }
 
 // Display the specified resource.
@@ -27,12 +32,14 @@ async function show(req, res) {
     order: [["comments", "createdAt", "DESC"]],
   });
   const comments = article.comments;
-  return res.render("article", { article, comments });
+  const { textoBoton, ruta } = pagesController.buttonNavbar(req);
+  return res.render("article", { article, comments, textoBoton, ruta });
 }
 
 // Show the form for creating a new resource
 async function create(req, res) {
-  res.render("createArticle");
+  const { textoBoton, ruta } = pagesController.buttonNavbar(req);
+  res.render("createArticle", { textoBoton, ruta });
 }
 
 // Store a newly created resource in storage.
@@ -61,7 +68,8 @@ async function store(req, res) {
 // Show the form for editing the specified resource.
 async function edit(req, res) {
   const article = await Article.findByPk(req.params.id);
-  req.body.title = res.render("editArticle", { article });
+  const { textoBoton, ruta } = pagesController.buttonNavbar(req);
+  req.body.title = res.render("editArticle", { article, textoBoton, ruta });
 }
 
 // Update the specified resource in storage.

@@ -1,11 +1,13 @@
 const { Author } = require("../models");
+const pagesController = require("./pagesController");
 
 // Display a listing of the resource.
 async function index(req, res) {}
 
 // Display the specified resource.
 async function show(req, res) {
-  res.render("login");
+  const { textoBoton, ruta } = pagesController.buttonNavbar(req);
+  res.render("login", { textoBoton, ruta });
 }
 
 /*async function authenticate(req, res) {

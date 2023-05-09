@@ -19,7 +19,7 @@
   </head>
   <body>
     <section id="section-header">
-      <%- include("partials/navbar") %>
+      <%- include("partials/navbar", {loginBtn: textoBoton, link: ruta, }) %>
       <div class="container-fluid p-0">
         <%if (article.imageURL != null) {%>
         <div id="image-article" style="background-image: url('../img/<%=article.imageURL%>')"></div>

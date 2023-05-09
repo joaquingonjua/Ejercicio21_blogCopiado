@@ -18,13 +18,26 @@
 
 const { Article } = require("../models");
 
+function buttonNavbar(req) {
+  let textoBoton = "";
+  let ruta = "";
+  if (req.isAuthenticated()) {
+    textoBoton = "Lista de articulos";
+    ruta = "/articulos";
+  } else {
+    textoBoton = "Login";
+    ruta = "/login";
+  }
+  return { textoBoton, ruta };
+}
+
 async function showHome(req, res) {
   const articles = await Article.findAll({
     order: [["createdAt", "DESC"]],
     include: "author",
   });
-
-  res.render("home", { articles });
+  const { textoBoton, ruta } = buttonNavbar(req);
+  res.render("home", { articles, textoBoton, ruta });
 }
 
 async function showContact(req, res) {
@@ -42,4 +55,5 @@ module.exports = {
   showHome,
   showContact,
   showAboutUs,
+  buttonNavbar,
 };
