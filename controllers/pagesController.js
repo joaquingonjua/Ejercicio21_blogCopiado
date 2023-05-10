@@ -31,15 +31,16 @@ function buttonNavbar(req) {
   return { textoBoton, ruta };
 }
 
-function sendCommentButton (req){
-  buttonType= ""
+function sendCommentButton(req) {
+  buttonType = "";
   if (req.isAuthenticated()) {
     buttonType = "submit";
-  }else{ 
-    buttonType = ""
+  } else {
+    buttonType = "";
     addLoginRoute = "/login";
+  }
+  return { buttonType };
 }
-return { buttonType };
 
 async function showHome(req, res) {
   const articles = await Article.findAll({
