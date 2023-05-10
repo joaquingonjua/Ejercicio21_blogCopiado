@@ -40,6 +40,8 @@ function sendCommentButton(req) {
     addLoginRoute = "/login";
   }
   return { buttonType };
+  // express flash para mostrar mensaje de que debe estar logueado?
+  // establecer ruta con <a> o directo con href del boton send?
 }
 
 async function showHome(req, res) {
@@ -67,4 +69,5 @@ module.exports = {
   showContact,
   showAboutUs,
   buttonNavbar,
+  sendCommentButton,
 };
