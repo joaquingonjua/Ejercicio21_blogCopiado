@@ -36,16 +36,7 @@ function buttonNavbar(req) {
 }
 
 function sendCommentButton(req) {
-  buttonType = "";
-  if (req.isAuthenticated()) {
-    buttonType = "submit";
-  } else {
-    buttonType = "";
-    addLoginRoute = "/login";
-  }
-  return { buttonType };
-  // express flash para mostrar mensaje de que debe estar logueado?
-  // establecer ruta con <a> o directo con href del boton send?
+  return req.isAuthenticated();
 }
 
 async function showHome(req, res) {

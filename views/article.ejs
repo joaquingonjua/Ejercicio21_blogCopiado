@@ -55,23 +55,11 @@
           <div>
             <form action="/comentarios/" method="POST">
               <div class="title-form">Add your comment</div>
-              <div>
-                <label
-                  for="articleCommentAuthor"
-                  class="form-label m-0"
-                  style="position: absolute"
-                ></label>
-                <input
-                  type="text"
-                  class="form-control mt-3"
-                  id="commentAuthor"
-                  placeholder="Name"
-                  name="name"
-                />
-              </div>
-
+              <% if (isLoggedIn) { %>
               <div class="mb-3">
-                <label for="articleCommentContent" class="form-label"></label>
+                <label for="articleCommentContent" class="form-label">
+                  <%= userFirstname %> <%= userLastname %></label
+                >
                 <textarea
                   type="text"
                   class="form-control"
@@ -81,19 +69,27 @@
                 ></textarea>
               </div>
 
+              <% } %>
               <input type="hidden" name="articleId" value="<%=article.id%>" />
-
+              <% if (isLoggedIn) { %>
               <button type="submit" class="btn btn-primary container-fluid">Send</button>
+              <% } else { %>
+              <p class="fw-lighter fst-italic">
+                Usuarios deben estar logueados para comentar artículos
+              </p>
+              <a type="button" class="btn btn-primary" href="/login">Log in</a>
+              <% } %>
             </form>
             <div class="column" id="articleCommentsPrevious">
-              <div class="title-form mt-3">Comments(<%=comments.length%>)</div>
-              <%for (const comment of comments) {%>
+              <div class="title-form mt-3">Comments(<%=article.comments.length%>)</div>
+              <%for (const comment of article.comments) {%>
               <div class="row">
                 <h4 class="mt-3"><%=comment.content%></h4>
                 <% const minutes = String(comment.createdAt.getMinutes())%>
                 <h5>
-                  <%=`Creado por ${comment.user} el ${comment.createdAt.getDay()} del
-                  ${comment.createdAt.getMonth()} de ${comment.createdAt.getFullYear()}
+                  <%=`Creado por ${comment.author.firstname} ${comment.author.lastname} el
+                  ${comment.createdAt.getDay()} del ${comment.createdAt.getMonth()} de
+                  ${comment.createdAt.getFullYear()}
                   ${comment.createdAt.getHours()}:${minutes.padStart(2, '0')}`%>
                 </h5>
                 <hr />

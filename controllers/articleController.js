@@ -28,12 +28,29 @@ async function index(req, res) {
 // Display the specified resource.
 async function show(req, res) {
   const article = await Article.findByPk(req.params.id, {
-    include: ["author", "comments"],
+    include: { all: true, nested: true },
     order: [["comments", "createdAt", "DESC"]],
   });
-  const comments = article.comments;
+
   const { textoBoton, ruta } = pagesController.buttonNavbar(req);
-  return res.render("article", { article, comments, textoBoton, ruta });
+  const isLoggedIn = pagesController.sendCommentButton(req);
+
+  let userFirstname = "";
+  let userLastname = "";
+
+  if (req.isAuthenticated()) {
+    userFirstname = req.user.firstname;
+    userLastname = req.user.lastname;
+  }
+
+  return res.render("article", {
+    article,
+    textoBoton,
+    ruta,
+    isLoggedIn,
+    userFirstname,
+    userLastname,
+  });
 }
 
 // Show the form for creating a new resource
