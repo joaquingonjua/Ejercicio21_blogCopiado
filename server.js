@@ -37,7 +37,6 @@ passport.use(
 
     async (username, password, done) => {
       try {
-        console.log(username, password);
         const user = await Author.findOne({ where: { email: username } });
         if (!user) {
           console.log("Nombre de usuario no existe.");

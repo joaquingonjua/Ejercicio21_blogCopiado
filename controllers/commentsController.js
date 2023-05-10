@@ -3,7 +3,7 @@ const { Comment } = require("../models");
 // Store a newly created resource in storage.
 async function store(req, res) {
   await Comment.create({
-    user: req.body.name,
+    authorId: req.user.id,
     content: req.body.content,
     articleId: req.body.articleId,
   });

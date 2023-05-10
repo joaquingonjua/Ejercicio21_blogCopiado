@@ -57,8 +57,8 @@
               <% if (isLoggedIn) { %>
               <div class="mb-3">
                 <label for="articleCommentContent" class="form-label">
-                  <%= `${firstname} ${lastname}`%>
-                </label>
+                  <%= userFirstname %> <%= userLastname %></label
+                >
                 <textarea
                   type="text"
                   class="form-control"
@@ -80,14 +80,15 @@
               <% } %>
             </form>
             <div class="column" id="articleCommentsPrevious">
-              <div class="title-form mt-3">Comments(<%=comments.length%>)</div>
-              <%for (const comment of comments) {%>
+              <div class="title-form mt-3">Comments(<%=article.comments.length%>)</div>
+              <%for (const comment of article.comments) {%>
               <div class="row">
                 <h4 class="mt-3"><%=comment.content%></h4>
                 <% const minutes = String(comment.createdAt.getMinutes())%>
                 <h5>
-                  <%=`Creado por ${comment.user} el ${comment.createdAt.getDay()} del
-                  ${comment.createdAt.getMonth()} de ${comment.createdAt.getFullYear()}
+                  <%=`Creado por ${comment.author.firstname} ${comment.author.lastname} el
+                  ${comment.createdAt.getDay()} del ${comment.createdAt.getMonth()} de
+                  ${comment.createdAt.getFullYear()}
                   ${comment.createdAt.getHours()}:${minutes.padStart(2, '0')}`%>
                 </h5>
                 <hr />

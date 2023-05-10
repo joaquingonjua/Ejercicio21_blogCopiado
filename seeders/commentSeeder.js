@@ -9,7 +9,7 @@ module.exports = async () => {
     comments.push({
       content: faker.lorem.paragraph(),
       articleId: faker.datatype.number({ min: 1, max: 20 }),
-      user: faker.name.firstName() + " " + faker.name.lastName(),
+      authorId: faker.datatype.number({ min: 1, max: 20 }),
     });
   }
 
