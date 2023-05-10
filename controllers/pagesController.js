@@ -31,6 +31,19 @@ function buttonNavbar(req) {
   return { textoBoton, ruta };
 }
 
+function sendCommentButton(req) {
+  buttonType = "";
+  if (req.isAuthenticated()) {
+    buttonType = "submit";
+  } else {
+    buttonType = "";
+    addLoginRoute = "/login";
+  }
+  return { buttonType };
+  // express flash para mostrar mensaje de que debe estar logueado?
+  // establecer ruta con <a> o directo con href del boton send?
+}
+
 async function showHome(req, res) {
   const articles = await Article.findAll({
     order: [["createdAt", "DESC"]],
@@ -56,4 +69,5 @@ module.exports = {
   showContact,
   showAboutUs,
   buttonNavbar,
+  sendCommentButton,
 };
