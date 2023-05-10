@@ -22,9 +22,8 @@ async function show(req, res) {
 
 // Show the form for creating a new resource
 async function create(req, res) {
-  const textoBoton = "Log in";
-  const ruta = "/login";
-  res.render("createAccount", { textoBoton, ruta });
+  const { textoBoton, ruta, textoBotonB, rutaB } = pagesController.buttonNavbar(req);
+  res.render("createAccount", { textoBoton, textoBotonB, ruta, rutaB });
 }
 
 // Store a newly created resource in storage.
