@@ -23,25 +23,20 @@ function buttonNavbar(req) {
   let ruta = "";
   if (req.isAuthenticated()) {
     textoBoton = "Lista de articulos";
+    textoBotonB = "Log Out";
     ruta = "/articulos";
+    rutaB = "/logout";
   } else {
     textoBoton = "Login";
+    textoBotonB = "Register";
     ruta = "/login";
+    rutaB = "/login"; ///usuarios/registrarse;
   }
-  return { textoBoton, ruta };
+  return { textoBoton, ruta, textoBotonB, rutaB };
 }
 
 function sendCommentButton(req) {
-  buttonType = "";
-  if (req.isAuthenticated()) {
-    buttonType = "submit";
-  } else {
-    buttonType = "";
-    addLoginRoute = "/login";
-  }
-  return { buttonType };
-  // express flash para mostrar mensaje de que debe estar logueado?
-  // establecer ruta con <a> o directo con href del boton send?
+  return req.isAuthenticated();
 }
 
 async function showHome(req, res) {
@@ -50,7 +45,7 @@ async function showHome(req, res) {
     include: "author",
   });
   const { textoBoton, ruta } = buttonNavbar(req);
-  res.render("home", { articles, textoBoton, ruta });
+  res.render("home", { articles, textoBoton, ruta, textoBotonB, rutaB });
 }
 
 async function showContact(req, res) {
