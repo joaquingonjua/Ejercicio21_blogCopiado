@@ -20,24 +20,13 @@
       <%- include("partials/navbar", {loginBtn: textoBoton, link: ruta, loginBtnB:
       textoBotonB,linkB: rutaB }) %>
     </section>
-    <section id="createForm">
+    <section id="createForm" class="section-content">
       <div class="container shadow rounded p-5 mt-5">
         <form
           method="POST"
           action="/articulos/<%=article.id %>?_method=PATCH"
           enctype="multipart/form-data"
         >
-          <div class="mb-3">
-            <label for="articleAuthor" class="form-label">Nombre del Autor</label>
-
-            <input
-              type="text"
-              class="form-control"
-              id="articleAuthor"
-              value="<%=article.authorId%>"
-              name="authorId"
-            />
-          </div>
           <div class="mb-3">
             <label for="articleTitle" class="form-label">Título</label>
             <input

@@ -19,8 +19,8 @@
       <%- include("partials/navbar", {loginBtn: textoBoton, link: ruta, loginBtnB:
       textoBotonB,linkB: rutaB }) %>
     </section>
-    <section class="container">
-      <form method="post" action="/usuarios/registrarse">
+    <section class="container section-content">
+      <form method="post" action="/usuarios/registrarse" class="w-50 mx-auto">
         <div class="mb-3">
           <label for="newFirstname">Nombre</label>
           <input
@@ -62,7 +62,7 @@
           />
           <div id="pass" class="form-text">Ingrese su contraseña de 8-20 caracteres.</div>
         </div>
-        <button type="submit" class="btn btn-success">Registrarse</button>
+        <button type="submit" class="btn btn-success form-control">Registrarse</button>
       </form>
     </section>
     <section id="section-footer"><%- include("./partials/footer.ejs") %></section>

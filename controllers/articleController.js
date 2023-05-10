@@ -75,7 +75,7 @@ async function store(req, res) {
       title: fields.title,
       content: fields.content,
       imageURL: files.image.newFilename,
-      authorId: fields.authorId,
+      authorId: req.user.id,
     });
   });
 
@@ -106,7 +106,7 @@ async function update(req, res) {
         title: fields.title,
         content: fields.content,
         imageURL: files.image.newFilename,
-        authorId: fields.authorId,
+        authorId: req.user.id,
       },
       {
         where: { id: req.params.id },
