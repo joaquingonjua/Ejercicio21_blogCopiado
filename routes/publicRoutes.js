@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const pagesController = require("../controllers/pagesController");
 const userController = require("../controllers/userController");
+const authenticationController = require("../controllers/authenticationController");
 const passport = require("passport");
 
 router.get("/", pagesController.showHome);
@@ -15,5 +16,7 @@ router.post(
     failureRedirect: "/login",
   }),
 );
+
+router.get("/logout", authenticationController.logOut);
 
 module.exports = router;

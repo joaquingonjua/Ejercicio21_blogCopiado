@@ -23,12 +23,16 @@ function buttonNavbar(req) {
   let ruta = "";
   if (req.isAuthenticated()) {
     textoBoton = "Lista de articulos";
+    textoBotonB = "Log Out";
     ruta = "/articulos";
+    rutaB = "/logout";
   } else {
     textoBoton = "Login";
+    textoBotonB = "Register";
     ruta = "/login";
+    rutaB = "/login"; ///usuarios/registrarse;
   }
-  return { textoBoton, ruta };
+  return { textoBoton, ruta, textoBotonB, rutaB };
 }
 
 function sendCommentButton(req) {
@@ -50,7 +54,7 @@ async function showHome(req, res) {
     include: "author",
   });
   const { textoBoton, ruta } = buttonNavbar(req);
-  res.render("home", { articles, textoBoton, ruta });
+  res.render("home", { articles, textoBoton, ruta, textoBotonB, rutaB });
 }
 
 async function showContact(req, res) {
