@@ -32,8 +32,27 @@ async function show(req, res) {
     order: [["comments", "createdAt", "DESC"]],
   });
   const comments = article.comments;
+
   const { textoBoton, ruta } = pagesController.buttonNavbar(req);
-  return res.render("article", { article, comments, textoBoton, ruta });
+  const isLoggedIn = pagesController.sendCommentButton(req);
+
+  let firstname = "";
+  let lastname = "";
+
+  if (req.isAuthenticated()) {
+    firstname = req.user.firstname;
+    lastname = req.user.lastname;
+  }
+
+  return res.render("article", {
+    article,
+    comments,
+    textoBoton,
+    ruta,
+    isLoggedIn,
+    firstname,
+    lastname,
+  });
 }
 
 // Show the form for creating a new resource
