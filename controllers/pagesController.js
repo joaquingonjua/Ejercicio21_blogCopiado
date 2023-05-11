@@ -30,7 +30,7 @@ function buttonNavbar(req) {
     textoBoton = "Login";
     textoBotonB = "Register";
     ruta = "/login";
-    rutaB = "/usuarios/registrarse";
+    rutaB = "/registrarse";
   }
   return { textoBoton, ruta, textoBotonB, rutaB };
 }
