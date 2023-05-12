@@ -3,14 +3,26 @@
     <a class="navbar-brand bg-black" href="/"
       ><strong style="color: white">Hack the blog</strong></a
     >
-    <div class="my-auto">
-      <% if(user) {%>
-      <p class="d-inline-block text-white fw-bold me-3 my-0">
-        <%= user.firstname %> <%= user.lastname %>
-      </p>
-      <% } %>
-      <a type="button" class="btn btn-primary" href="<%=`${link}`%>"><%=loginBtn%></a>
-      <a type="button" class="btn btn-primary" href="<%=`${linkB}`%>"><%=loginBtnB%></a>
+    <div class="nav-item dropdown my-auto">
+      <a
+        class="nav-link dropdown-toggle"
+        href="#"
+        role="button"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        <% if(user) {%>
+        <p class="d-inline-block text-white fw-bold me-3 my-0">
+          <%= user.firstname %> <%= user.lastname %>
+        </p>
+        <% }else{ %>
+        <p class="d-inline-block text-white fw-bold me-3 my-0">Menu</p>
+        <% } %>
+      </a>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="<%=`${link}`%>"><%=loginBtn%></a></li>
+        <li><a class="dropdown-item" href="<%=`${linkB}`%>"><%=loginBtnB%></a></li>
+      </ul>
     </div>
   </div>
 </nav>
