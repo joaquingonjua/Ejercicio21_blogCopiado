@@ -77,9 +77,8 @@ async function store(req, res) {
       imageURL: files.image.newFilename,
       authorId: req.user.id,
     });
+    return await res.redirect("/panel/admin");
   });
-
-  return await res.redirect("/panel/admin");
 }
 
 // Show the form for editing the specified resource.
@@ -112,8 +111,8 @@ async function update(req, res) {
         where: { id: req.params.id },
       },
     );
+    return res.redirect("/panel/admin");
   });
-  return res.redirect("/panel/admin");
 }
 
 // Remove the specified resource from storage.

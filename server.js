@@ -4,9 +4,10 @@ const express = require("express");
 let methodOverride = require("method-override");
 const { passport, passportConfig } = require("./config/passport");
 const routes = require("./routes");
-const sequelize = require("sequelize");
+
 const flash = require("express-flash");
 const authenticationMessage = require("./middlewares/authenticationMessage");
+const makeUserAvailableInViews = require("./middlewares/makeUserAvailableInViews");
 
 const session = require("express-session");
 
@@ -31,6 +32,7 @@ passportConfig();
 
 app.use(flash());
 app.use(authenticationMessage);
+app.use(makeUserAvailableInViews);
 routes(app);
 
 app.listen(APP_PORT, () => {
