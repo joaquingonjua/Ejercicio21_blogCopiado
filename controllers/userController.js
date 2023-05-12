@@ -26,6 +26,7 @@ async function store(req, res) {
     lastname: req.body.newLastname,
     email: req.body.newEmail,
     password: await bcrypt.hash(req.body.newPassword, 2),
+    rolId: 1,
   });
   return await res.redirect("/login");
 }
