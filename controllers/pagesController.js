@@ -24,8 +24,8 @@ function buttonNavbar(req) {
   if (req.isAuthenticated()) {
     textoBoton = "Lista de articulos";
     textoBotonB = "Log Out";
-    ruta = "/articulos";
-    rutaB = "/logout";
+    ruta = "/panel/admin";
+    rutaB = "/panel/logout";
   } else {
     textoBoton = "Login";
     textoBotonB = "Register";

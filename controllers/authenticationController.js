@@ -4,6 +4,10 @@ function login(req, res) {
   passport.authenticate("local", {
     successRedirect: "/",
     failureRedirect: "/login",
+    failureFlash: {
+      type: "failureFlash", //NOMBRE DEL MESSAGE
+      message: "Credenciales incorrectas",
+    },
   })(req, res);
 }
 

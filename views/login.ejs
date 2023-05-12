@@ -19,6 +19,11 @@
     rutaB }) %>
     <div class="container section-content">
       <form action="/login" method="POST" class="w-50 mx-auto">
+        <% if(failureFlash.length !== 0){%>
+        <p class="border text-center p-1 rounded bg-danger bg-opacity-25 text-danger">
+          <%= failureFlash%>
+        </p>
+        <%}%>
         <div class="my-3">
           <label for="loginEmail">Email</label>
           <input

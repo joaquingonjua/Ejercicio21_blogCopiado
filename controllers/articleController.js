@@ -79,7 +79,7 @@ async function store(req, res) {
     });
   });
 
-  return await res.redirect("/articulos");
+  return await res.redirect("/panel/admin");
 }
 
 // Show the form for editing the specified resource.
@@ -113,13 +113,13 @@ async function update(req, res) {
       },
     );
   });
-  return res.redirect("/articulos");
+  return res.redirect("/panel/admin");
 }
 
 // Remove the specified resource from storage.
 async function destroy(req, res) {
   await Article.destroy({ where: { id: req.params.id } });
-  return res.redirect("/articulos");
+  return res.redirect("/panel/admin");
 }
 
 // Otros handlers...

@@ -13,13 +13,6 @@ async function show(req, res) {
   res.render("login", { textoBoton, ruta });
 }
 
-/*async function authenticate(req, res) {
-  res.passport.authenticate("local", {
-    successRedirect: "/admin",
-    failureRedirect: "/login",
-  });
-}*/
-
 // Show the form for creating a new resource
 async function create(req, res) {
   const { textoBoton, ruta, textoBotonB, rutaB } = pagesController.buttonNavbar(req);
