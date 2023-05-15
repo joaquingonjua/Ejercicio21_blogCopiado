@@ -18,7 +18,7 @@ const sequelize = new Sequelize(
 const Author = require("./Author");
 const Comment = require("./Comment");
 const Article = require("./Article");
-const Role = require("./Rol");
+const Role = require("./Role");
 
 Author.initModel(sequelize);
 Comment.initModel(sequelize);

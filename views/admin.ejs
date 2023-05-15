@@ -69,13 +69,13 @@
                       </a>
                     </div>
 
-                    <% if(article.author.id === user.id && user.roleId === 3){%>
+                    <% if(article.author.id === user.id){%>
                     <div class="ms-2">
                       <form method="POST" action="/panel/<%=article.id%>?_method=DELETE">
                         <button type="submit" class="btn btn-danger">Eliminar</button>
                       </form>
                     </div>
-                    <%}if(user.roleId >= 4){%>
+                    <%}else if(user.roleId >= 4){%>
                     <div class="ms-2">
                       <form method="POST" action="/panel/<%=article.id%>?_method=DELETE">
                         <button type="submit" class="btn btn-danger">Eliminar</button>

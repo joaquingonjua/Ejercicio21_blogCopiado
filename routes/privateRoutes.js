@@ -21,4 +21,7 @@ router.delete("/:id", ensureAuthenticated, articleController.destroy);
 
 router.get("/usuarios", ensureAuthenticated, isAdmin, userController.index);
 
+router.get("/usuarios/editar/:id", ensureAuthenticated, isAdmin, userController.edit);
+router.patch("/usuarios/editar/:id", ensureAuthenticated, isAdmin, userController.update);
+
 module.exports = router;
