@@ -19,8 +19,6 @@
 const { Article } = require("../models");
 
 function buttonNavbar(req) {
-  let textoBoton = "";
-  let ruta = "";
   if (req.isAuthenticated()) {
     textoBoton = "Lista de articulos";
     textoBotonB = "Log Out";
@@ -44,7 +42,7 @@ async function showHome(req, res) {
     order: [["createdAt", "DESC"]],
     include: "author",
   });
-  const { textoBoton, ruta } = buttonNavbar(req);
+  const { textoBoton, ruta, rutaB, textoBotonB, textoBotonC, rutaC } = buttonNavbar(req);
   res.render("home", { articles, textoBoton, ruta, textoBotonB, rutaB });
 }
 

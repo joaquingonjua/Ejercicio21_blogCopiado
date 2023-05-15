@@ -1,4 +1,5 @@
 const { Comment } = require("../models");
+const { buttonNavbar } = require("./pagesController");
 
 // Store a newly created resource in storage.
 async function store(req, res) {
@@ -11,13 +12,33 @@ async function store(req, res) {
 }
 
 // Show the form for editing the specified resource.
-async function edit(req, res) {}
+async function edit(req, res) {
+  const comment = await Comment.findOne({ where: { id: req.params.id } });
+  const { textoBoton, textoBotonB, ruta, rutaB } = buttonNavbar(req);
+  console.log(textoBoton, textoBotonB, ruta, rutaB);
+  await res.render("editComment", { comment, textoBoton, textoBotonB, ruta, rutaB });
+}
 
 // Update the specified resource in storage.
-async function update(req, res) {}
+async function update(req, res) {
+  const comment = await Comment.findOne({ where: { id: req.params.id }, include: { all: true } });
+  await Comment.update(
+    {
+      content: req.body.comment,
+    },
+    {
+      where: { id: req.params.id },
+    },
+  );
+  await res.redirect(`/articulos/${comment.articleId}`);
+}
 
 // Remove the specified resource from storage.
-async function destroy(req, res) {}
+async function destroy(req, res) {
+  const comment = await Comment.findOne({ where: { id: req.params.id }, include: { all: true } });
+  await Comment.destroy({ where: { id: req.params.id } });
+  await res.redirect(`/articulos/${comment.articleId}`);
+}
 
 module.exports = {
   store,

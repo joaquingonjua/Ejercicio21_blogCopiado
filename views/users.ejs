@@ -34,54 +34,35 @@
             <thead class="text-center">
               <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Título</th>
-                <th scope="col">Contenido</th>
-                <th scope="col">Imagen</th>
-                <th scope="col">Fecha de publicación</th>
-                <th scope="col">Autor</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Email</th>
+                <th scope="col">Fecha de registro</th>
+                <th scope="col">Rol</th>
                 <th scope="col">Acciones</th>
               </tr>
             </thead>
             <tbody class="text-center">
-              <% for (const article of articles) { %>
-              <tr style="cursor: pointer" onclick="document.location='/articulos/<%=article.id%>'">
-                <td><%= article.id %></td>
+              <% for (const author of authors) { %>
+              <tr>
+                <td><%= author.id %></td>
 
-                <td><%= article.title %></td>
+                <td><%= author.firstname %> <%= author.lastname%></td>
 
-                <td id="content"><%= article.content.slice(0, 50) %>...</td>
-                <td>
-                  <%if (article.imageURL != null) {%>
-                  <img src="/img/<%=article.imageURL%>" class="urlImg" alt="" />
-                  <%} else {%>
-                  <img src="/img/jeshoots-com-pUAM5hPaCRI-unsplash.jpg" class="urlImg" alt="" />
-                  <% } %>
-                </td>
-                <td><%= article.createdAt %></td>
+                <td id="content"><%= author.email %></td>
+                <td><%= author.createdAt %></td>
 
-                <td><%= article.author.firstname %> <%= article.author.lastname %></td>
+                <td><%= author.role.rol %></td>
 
                 <td>
-                  <div class="d-flex flex-row m-2 justify-content-center">
-                    <div class="ms-2">
-                      <a href="/panel/<%= article.id %>/editar" class="btn btn-primary">
-                        Modificar
-                      </a>
+                  <div class="row">
+                    <div class="ms-2 col">
+                      <a href="#" class="btn btn-primary"> Modificar </a>
                     </div>
-
-                    <% if(article.author.id === user.id && user.roleId === 3){%>
-                    <div class="ms-2">
-                      <form method="POST" action="/panel/<%=article.id%>?_method=DELETE">
+                    <div class="ms-2 col">
+                      <form method="POST" action="#?_method=DELETE">
                         <button type="submit" class="btn btn-danger">Eliminar</button>
                       </form>
                     </div>
-                    <%}if(user.roleId >= 4){%>
-                    <div class="ms-2">
-                      <form method="POST" action="/panel/<%=article.id%>?_method=DELETE">
-                        <button type="submit" class="btn btn-danger">Eliminar</button>
-                      </form>
-                    </div>
-                    <% }%>
                   </div>
                 </td>
 

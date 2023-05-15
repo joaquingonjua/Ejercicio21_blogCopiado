@@ -8,7 +8,7 @@ async function index(req, res) {
   let articles;
   if (req.user.roleId === 2) {
     articles = await Article.findAll({
-      include: "author",
+      include: { all: true },
       where: {
         authorId: req.user.id,
       },
@@ -24,9 +24,9 @@ async function index(req, res) {
       ],
     });
   }
-  if (req.user.roleId === 3 || req.user.roleId === 4) {
+  if (req.user.roleId >= 3) {
     articles = await Article.findAll({
-      include: "author",
+      include: { all: true },
       attributes: [
         "id",
         "title",
@@ -38,6 +38,9 @@ async function index(req, res) {
         ],
       ],
     });
+  }
+  if (req.user.roleId === 1) {
+    res.redirect("/");
   }
 
   const { textoBoton, ruta } = pagesController.buttonNavbar(req);
@@ -124,7 +127,6 @@ async function update(req, res) {
         title: fields.title,
         content: fields.content,
         imageURL: files.image.newFilename,
-        authorId: req.user.id,
       },
       {
         where: { id: req.params.id },

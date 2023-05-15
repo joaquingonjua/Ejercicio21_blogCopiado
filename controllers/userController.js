@@ -5,7 +5,22 @@ const formidable = require("formidable");
 const bcrypt = require("bcryptjs");
 
 // Display a listing of the resource.
-async function index(req, res) {}
+async function index(req, res) {
+  const authors = await Author.findAll({
+    include: { all: true },
+    attributes: [
+      "id",
+      "firstname",
+      "lastname",
+      "email",
+      [
+        sequelize.fn("DATE_FORMAT", sequelize.col("Author.createdAt"), "%d/%m/%Y %H:%m"),
+        "createdAt",
+      ],
+    ],
+  });
+  res.render("users", { authors });
+}
 
 // Display the specified resource.
 async function show(req, res) {
@@ -26,7 +41,7 @@ async function store(req, res) {
     lastname: req.body.newLastname,
     email: req.body.newEmail,
     password: await bcrypt.hash(req.body.newPassword, 2),
-    rolId: 1,
+    roleId: 1,
   });
   return await res.redirect("/login");
 }

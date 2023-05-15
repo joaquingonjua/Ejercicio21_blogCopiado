@@ -26,11 +26,13 @@ Article.initModel(sequelize);
 Role.initModel(sequelize);
 
 Role.hasMany(Author);
+Author.belongsTo(Role);
 
 Article.belongsTo(Author);
 Comment.belongsTo(Article);
 Article.hasMany(Comment);
 
+Author.hasMany(Article);
 Author.hasMany(Comment);
 Comment.belongsTo(Author);
 
