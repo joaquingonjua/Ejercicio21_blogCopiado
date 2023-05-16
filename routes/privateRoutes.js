@@ -28,6 +28,7 @@ router.delete("/usuarios/delete/:id", ensureAuthenticated, isAdmin, userControll
 
 router.get("/miperfil/:id", ensureAuthenticated, myProfileController.show);
 router.patch("/miperfil/:id", ensureAuthenticated, myProfileController.update);
+
 router.delete("/miperfil/delete/:id", ensureAuthenticated, myProfileController.destroy);
 
 module.exports = router;
