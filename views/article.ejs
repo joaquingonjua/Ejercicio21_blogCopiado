@@ -87,10 +87,13 @@
 
                 <% const minutes = String(comment.createdAt.getMinutes())%>
                 <small class="fs-6">
-                  <%=`Creado por ${comment.author.firstname} ${comment.author.lastname} el
-                  ${comment.createdAt.getDay()} del ${comment.createdAt.getMonth()} de
-                  ${comment.createdAt.getFullYear()}
-                  ${comment.createdAt.getHours()}:${minutes.padStart(2, '0')}`%>
+                  <%if(comment.authorId !== null){%> <%=`Creado por ${comment.author.firstname}
+                  ${comment.author.lastname} el ${comment.createdAt.getDay()} del
+                  ${comment.createdAt.getMonth()} de ${comment.createdAt.getFullYear()}
+                  ${comment.createdAt.getHours()}:${minutes.padStart(2, '0')}`%> <%}else{%>
+                  <%=`Creado por usuario anonimo el ${comment.createdAt.getDay()} del
+                  ${comment.createdAt.getMonth()} de ${comment.createdAt.getFullYear()}
+                  ${comment.createdAt.getHours()}:${minutes.padStart(2, '0')}`%> <%}%>
                 </small>
                 <%if(isLoggedIn){%>
                 <div class="my-2 d-block text-end">

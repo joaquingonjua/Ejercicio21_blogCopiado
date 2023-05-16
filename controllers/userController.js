@@ -71,7 +71,10 @@ async function update(req, res) {
 }
 
 // Remove the specified resource from storage.
-async function destroy(req, res) {}
+async function destroy(req, res) {
+  await Author.destroy({ where: { id: req.params.id }, include: { all: true } });
+  res.redirect("/panel/usuarios");
+}
 
 // Otros handlers...
 // ...

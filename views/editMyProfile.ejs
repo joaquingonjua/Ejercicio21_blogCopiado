@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Editar Artículo</title>
+    <script src="https://kit.fontawesome.com/8d24a6e83f.js" crossorigin="anonymous"></script>
+    <!-- CSS de Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <section id="section-header">
+      <%- include("partials/navbar", {loginBtn: textoBoton, link: ruta, loginBtnB:
+      textoBotonB,linkB: rutaB }) %>
+    </section>
+    <section id="createForm" class="section-content">
+      <div class="container shadow rounded p-5 mt-5">
+        <form method="POST" action="/panel/miperfil/<%=user.id %>?_method=PATCH">
+          <div class="mb-3">
+            <label for="myFirstname" class="form-label">Nombre</label>
+            <input
+              type="text"
+              class="form-control"
+              id="myFirstname"
+              value="<%=user.firstname%>"
+              name="myFirstname"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="myLastname" class="form-label">Apellido</label>
+            <input
+              type="text"
+              class="form-control"
+              id="myLastname"
+              value="<%=user.lastname%>"
+              name="myLastname"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="myEmail" class="form-label">Email</label>
+            <input
+              type="text"
+              class="form-control"
+              id="myEmail"
+              name="myEmail"
+              value="<%= user.email%>"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="myPassword" class="form-label">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="myPassword"
+              name="myPassword"
+              value="<%= user.password%>"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary my-1 form-control">Guardar cambios</button>
+          <form method="POST" action="/panel/miperfil/delete/<%=user.id%>?_method=DELETE">
+            <button type="submit" class="btn btn-danger my-1 form-control">
+              Eliminar mi usuario
+            </button>
+          </form>
+        </form>
+      </div>
+    </section>
+
+    <section id="section-footer"><%- include("partials/footer") %></section>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

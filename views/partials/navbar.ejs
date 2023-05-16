@@ -23,6 +23,8 @@
         <li><a class="dropdown-item" href="<%=`${link}`%>"><%=loginBtn%></a></li>
         <%if(user && user.roleId >= 4){%>
         <li><a class="dropdown-item" href="/panel/usuarios">Lista de usuarios</a></li>
+        <%}%> <%if(user){%>
+        <li><a class="dropdown-item" href="/panel/miperfil/<%= user.id%>">Mi perfil</a></li>
         <%}%>
         <li><a class="dropdown-item" href="<%=`${linkB}`%>"><%=loginBtnB%></a></li>
       </ul>

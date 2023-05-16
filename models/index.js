@@ -28,11 +28,12 @@ Role.initModel(sequelize);
 Role.hasMany(Author);
 Author.belongsTo(Role);
 
-Article.belongsTo(Author);
-Comment.belongsTo(Article);
 Article.hasMany(Comment);
+Comment.belongsTo(Article);
 
-Author.hasMany(Article);
+Author.hasMany(Article, { onDelete: "CASCADE" });
+Article.belongsTo(Author);
+
 Author.hasMany(Comment);
 Comment.belongsTo(Author);
 
