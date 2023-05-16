@@ -34,7 +34,6 @@ async function update(req, res) {
 
 // Remove the specified resource from storage.
 async function destroy(req, res) {
-  console.log(req.params.id, user.id);
   await Author.destroy({ where: { id: req.params.id }, include: { all: true } });
   await req.session.destroy(function (err) {
     res.redirect("/");
