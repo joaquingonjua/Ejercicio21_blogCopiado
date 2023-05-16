@@ -48,19 +48,26 @@ async function store(req, res) {
 
 // Show the form for editing the specified resource.
 async function edit(req, res) {
-  const users = await Author.findOne({ where: { id: req.params.id } });
+  const user = await Author.findOne({ where: { id: req.params.id }, include: { all: true } });
   const { textoBoton, ruta, textoBotonB, rutaB } = pagesController.buttonNavbar(req);
-  res.render("editUser", { users, textoBoton, textoBotonB, ruta, rutaB });
+  res.render("editUser", { user, textoBoton, textoBotonB, ruta, rutaB });
 }
 
 // Update the specified resource in storage.
 async function update(req, res) {
+  let password = req.body.updatePassword;
+  const author = await Author.findOne({ where: { id: req.params.id } });
+  if (password === author.password) {
+    password = author.password;
+  } else {
+    password = await bcrypt.hash(password, 2);
+  }
   await Author.update(
     {
       firstname: req.body.updateFirstname,
       lastname: req.body.updateLastname,
       email: req.body.updateEmail,
-      password: await bcrypt.hash(req.body.updatePassword, 2),
+      password: await password,
       roleId: req.body.updateRole,
     },
     {

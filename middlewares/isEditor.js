@@ -1,5 +1,5 @@
 function editOrDeleteComment(req, res, next) {
-  if (req.user.roleId >= 3) {
+  if (req.user.role.roleCode >= 300) {
     next();
   } else {
     res.redirect("back");

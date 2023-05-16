@@ -53,16 +53,6 @@
               value="<%= user.email%>"
             />
           </div>
-          <div class="mb-3">
-            <label for="myPassword" class="form-label">Password</label>
-            <input
-              type="password"
-              class="form-control"
-              id="myPassword"
-              name="myPassword"
-              value="<%= user.password%>"
-            />
-          </div>
           <button type="submit" class="btn btn-primary my-1 form-control">Guardar cambios</button>
         </form>
         <form method="POST" action="/panel/miperfil/delete/<%=user.id%>?_method=DELETE">

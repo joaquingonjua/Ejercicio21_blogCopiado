@@ -6,7 +6,7 @@ const pagesController = require("./pagesController");
 // Display a listing of the resource.
 async function index(req, res) {
   let articles;
-  if (req.user.roleId === 2) {
+  if (req.user.role.roleCode >= 200 && req.user.role.roleCode < 300) {
     articles = await Article.findAll({
       include: { all: true },
       where: {
@@ -24,7 +24,7 @@ async function index(req, res) {
       ],
     });
   }
-  if (req.user.roleId >= 3) {
+  if (req.user.role.roleCode >= 300) {
     articles = await Article.findAll({
       include: { all: true },
       attributes: [
@@ -39,7 +39,7 @@ async function index(req, res) {
       ],
     });
   }
-  if (req.user.roleId === 1) {
+  if (req.user.role.roleCode >= 100 && req.user.role.roleCode < 200) {
     res.redirect("/");
   }
 

@@ -9,7 +9,8 @@ class Role extends Model {
           primaryKey: true,
           autoIncrement: true,
         },
-        rol: {
+        roleCode: { type: DataTypes.STRING(100), allowNull: false },
+        role: {
           type: DataTypes.STRING(100),
           allowNull: false,
         },

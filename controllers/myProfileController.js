@@ -11,19 +11,11 @@ async function show(req, res) {
 
 // Update the specified resource in storage.
 async function update(req, res) {
-  let password = req.body.myPassword;
-  const author = await Author.findOne({ where: { id: req.params.id } });
-  if (password === author.password) {
-    password = author.password;
-  } else {
-    password = await bcrypt.hash(password, 2);
-  }
   await Author.update(
     {
       firstname: req.body.myFirstname,
       lastname: req.body.myLastname,
       email: req.body.myEmail,
-      password: await password,
     },
     {
       where: { id: req.params.id },

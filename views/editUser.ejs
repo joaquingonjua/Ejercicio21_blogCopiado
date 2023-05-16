@@ -22,14 +22,14 @@
     </section>
     <section id="createForm" class="section-content">
       <div class="container shadow rounded p-5 mt-5">
-        <form method="POST" action="/panel/usuarios/editar/<%=users.id %>?_method=PATCH">
+        <form method="POST" action="/panel/usuarios/editar/<%=user.id %>?_method=PATCH">
           <div class="mb-3">
             <label for="updateFirstname" class="form-label">Nombre</label>
             <input
               type="text"
               class="form-control"
               id="updateFirstname"
-              value="<%=users.firstname%>"
+              value="<%=user.firstname%>"
               name="updateFirstname"
             />
           </div>
@@ -39,7 +39,7 @@
               type="text"
               class="form-control"
               id="updateLastname"
-              value="<%=users.lastname%>"
+              value="<%=user.lastname%>"
               name="updateLastname"
             />
           </div>
@@ -50,7 +50,7 @@
               class="form-control"
               id="updateEmail"
               name="updateEmail"
-              value="<%= users.email%>"
+              value="<%= user.email%>"
             />
           </div>
           <div class="mb-3">
@@ -60,12 +60,12 @@
               class="form-control"
               id="updatePassword"
               name="updatePassword"
-              value="<%= users.password%>"
+              value="<%= user.password%>"
             />
           </div>
           <div class="mb-3">
             <select name="updateRole" class="form-select" aria-label="updateRole">
-              <option selected>Seleccione un rol</option>
+              <option value="<%=user.roleId%>" selected><%= user.role.role%></option>
               <option value="1">Lector</option>
               <option value="2">Escritor</option>
               <option value="3">Editor</option>

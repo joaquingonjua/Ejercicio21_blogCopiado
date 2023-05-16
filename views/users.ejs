@@ -23,11 +23,7 @@
     <section class="section-content">
       <div class="container">
         <div class="row">
-          <div class="col"><h3 id="tituloTabla">Articles</h3></div>
-
-          <div class="col text-end">
-            <a id="btn-nuevo" href="/panel/crear" class="btn btn-success">Nuevo</a>
-          </div>
+          <div class="col"><h3 id="tituloTabla">Usuarios</h3></div>
         </div>
         <div class="mt-3">
           <table id="articlesTable" class="table table-light table-striped table-hover">
@@ -52,7 +48,7 @@
                 <td id="content"><%= author.email %></td>
                 <td><%= author.createdAt %></td>
 
-                <td><%= author.role.rol %></td>
+                <td><%= author.role.role %></td>
 
                 <td>
                   <div class="row">
